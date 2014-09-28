@@ -1,0 +1,87 @@
+{% extends "landing-page.html" %}
+{% block body %}
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart"]});
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Name', 'Score', { role: 'style' }],
+  ['{{name0}}', {{score0}}, '#cccc00' ],
+  ['{{name1}}', {{score1}}, '#935590' ],
+  ['{{name2}}', {{score2}}, '#559093' ]
+  ]);
+
+  var options = {
+  title: 'Stylist Score',
+  fontName: 'Helvetica Neue',
+  fontSize: 14,
+  width: 420,
+  height: 280,
+  chartArea: { left:80, top:40, width:'70%', height:'60%' },
+  backgroundColor: { stroke: '#935590' , strokeWidth: 5 },
+  hAxis: { title: '*The score takes into account rating and number or reviews for each stylist',
+           viewWindowMode: 'explicit',
+           viewWindow: { max:5, min:1 },
+           gridlines: {count:5 },
+         },
+  vAxis: { textStyle: { bold: true } },
+  legend: { position: "none" },
+  annotations: { alwaysOutside: true }
+  };
+  
+  var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+  chart.draw(data,options);
+  }
+</script>
+
+
+    <div class="container" id="stylist-container">
+      <br>
+      <div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+	  <br>
+	  <div class="thumbnail" style="background-color: #797ba9; height: 160px;">
+	<div class="caption"> 
+	  <h1 style="text-align:center; color: #2a1710">{{ salon }}</h1>
+	  <div class="col-md-5">
+	    <img src="static/images/Yelp-logo.png" alt="Responsive image" height="65" style="vertical-align:top"><br>
+	  </div>
+	  <div class="col-md-2">
+	    <br><img src="{{imagesrc}}" alt="Responsive image" height="20" style="align:center">
+	    <br>
+	    <div style="color: #2a1710; text-align:center">{{review_count}} reviews</div>
+	  </div>
+	  <div class="col-md-5" style="text-align:right; color: #2a1710">
+	    {{location}}<br>
+	    {{street}}<br>
+	    {{city}}<br>
+	  </div>
+	</div>
+      </div>
+      <!-- second block -->
+      <div class="thumbnail" style="background-color: #935590; border-color: white; height: 60px">
+	<div class="caption"> 
+	  <h4 style="color: white; text-align:center">
+	    We recommend that you try to book an appointment with {{name0}}, {{name1}} or {{name2}}
+	  </h4>
+	</div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>
+<br>
+
+<body>
+  <td colSpan=2>
+    <center>
+      <div id="chart_div"></div>
+    </center>
+  </td>
+</body>
+
+{% endblock %}

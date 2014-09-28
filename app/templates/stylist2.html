@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="container" id="stylist-container">
+  <br>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <br>
+      <div class="thumbnail" style="background-color: #797ba9; margin-color: #797ba9; height: 160px;">
+	<div class="caption"> 
+	  <h1 style="text-align:center; color: #2a1710">{{ salon }}</h1>
+	  <div class="col-md-5">
+	    <img src="static/images/Yelp-logo.png" alt="Responsive image" height="65" style="vertical-align:top"><br>
+	  </div>
+	  <div class="col-md-2">
+	    <br><img src="{{imagesrc}}" alt="Responsive image" height="20" style="align:center">
+	    <br>
+	    <div style="color: #2a1710; text-align:center">{{review_count}} reviews</div>
+	  </div>
+	  <div class="col-md-5" style="text-align:right; color: #2a1710">
+	    {{location}}<br>
+	    {{street}}<br>
+	    {{city}}<br>
+	  </div>
+	</div>
+      </div>
+      <!-- second block -->
+      <br>
+      <p class="lead" style="text-align:center">
+	Unfortunately we do not have enough reviews to recommend a stylist in this salon.
+      </p>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>
+
+<br><br>
+
+<body>
+  <div style="text-align:center">
+    <img src="static/images/cute_animal.jpg" alt="Responsive image" height="200">
+  </div>
+</body>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block css %}
+
+{% endblock %}
+{% block body %}
+
+<br>
+<div class="container">
+  <br><br>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h1 style="text-align:center">WhoDoesMyHair</h1>
+      <br><br>
+      <p class="lead summary">
+  	Worried who is going to cut or dye your hair? Tell us which hair salon you are going to and we will suggest the most popular stylists.
+      </p>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <br><br><br>
+
+  <div class="col-md-2"></div> <!-- left side -->
+  <div class="col-md-4">
+    <img src="static/images/haircut.jpg" class="img-circle" alt="Responsive image" height="200">
+  </div>
+
+  <div class="col-md-4"> <!-- right side -->
+    <br>
+    <div class="thumbnail" style="background-color: #a9a779;">
+      <div class="caption"> 
+	<h3 style="color: #935590">Las Vegas Hair Salons</h3>
+	<form action="/stylist" method="POST">
+
+	  <b><p style="color: #2a1710;">Choose a salon: 
+	      <input id="autocomplete1" type="text" placeholder="Salon" name="salonname">
+	      <button type="submit" style="background-color: #935590; color: white;" class="btn btn-default">Search</button>
+	  </p></b>
+
+	  <script>	/*
+		 * jQuery UI Autocomplete: Using Label-Value Pairs
+		 * http://salman-w.blogspot.com/2013/12/jquery-ui-autocomplete-examples.html
+		 */
+		var data=[
+	    "A Robert Cromeans Salon","aDias Salon","All Star Hair & Nails","Amelia C & Co","American Male","American Male Salon","Aveda Institute Las Vegas",
+	    "Beauty To Beauty","Blowout Dollhouse","Bombshell Hair & Extension Co.","Boulevard Salon","Brannon Hair",
+	    "Canyon Falls Spa & Salon","Canyon Ranch SpaClub","Centennial Hills Salon & Day Spa","Creative Salon and Spa","Curl Up N Dye",
+	    "Divas Xpress",
+	    "Envogue Salon","Epiphany Beauty Salon","ESPA at VDARA",
+	    "Fantastic Sams on Maryland Pkwy","Fino For Men",
+	    "Globe Salon","Great Clips on S Durango Dr",
+	    "Holly Jackson Hair Design","Hotbox Salon",
+	    "iBlowdry Salon","ISIS Beauty Salon",
+	    "James and Gaye at Body Spa West","Joni Rankin Color Specialist","Josephine Skaught Hairdressing",
+	    "Kelly Cardenas Salon","Kim Vo Salon",
+	    "LOOK Style Society",
+	    "Makeup In the 702","Montage Hair Studio","Mosaic Salon Boutique",
+	    "Paul Mitchell The School","Perfect Hair and Makeup","Phantasy Hair Salon","Phoenix Salon by Matt Rose","Pico Madama","Pigs & Pomps",
+	    "Qua Baths & Spa",
+	    "Ritual Salon & Spa","Rus 2 Our",
+	    "Salon Charisma","Salon Static","Shag Me Salon","Shellynn Nicole","Snips & Clips 4 Kids","Sport Clips on Eastern Ave","Suite One Salon",
+	    "The Parlor","True Salon",
+	    "Viva Salon"
+	                 ];
+
+		$(document).ready(function() {
+		$("#autocomplete1").autocomplete({
+				source: data
+			});
+		});
+	  </script>
+	</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<body style="background-color: #797ba9"></body>
+{% endblock %}
