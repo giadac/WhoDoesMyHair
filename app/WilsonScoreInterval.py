@@ -7,9 +7,9 @@ Calculates the Wilson Score for all the stylists in each salon
 import numpy as np
 from math import sqrt
 
-import pymysql as mdb
-cnx = mdb.connect(host='localhost',port=int(3306),user='root',passwd='',db='yelpdb')
-cur = cnx.cursor()
+from app import load_db
+cnx = load_db.DB()
+cur = cnx.cur
 
 # for each single review rating, calculate weights 
 # return 2 values: positive weight, negative weight

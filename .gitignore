@@ -50,10 +50,12 @@ Thumbs.db
 # repository specific #
 #######################
 
+run_local.py
 test_db.py
 world_innodb.sql
 
 views.py
+load_db.py
 
 cities.html
 index.html
