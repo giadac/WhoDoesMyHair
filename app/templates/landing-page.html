@@ -56,8 +56,12 @@
 	    {% else %}
             <li style="color: #2a1710;"><a style="color: #2a1710;">Stylist</a></li>
 	    {% endif %}
-	    <!-- tab contact -->
-            <li><a href="#contact">Contact</a></li>
+	    <!-- tab slides -->
+	    {% if tab == "slides" %}
+            <li class="active"><a style="background-color: #a9a779; color: #2a1710;">Slides</a></li>
+	    {% else %}
+            <li><a href="/slides">Slides</a></li>
+	    {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>

@@ -133,6 +133,13 @@ def result():
                                name1=names[1],score1=scores[1],
                                name2=names[2],score2=scores[2])
 
+@app.route('/slides', methods=["GET"])
+def slides():
+    """Slides
+    """ 
+    title = "WhoDoesMyHair demo slides"
+    return render_template("slides.html",title=title,tab="slides")
+
 #@app.route("/db_fancy")
 #def cities_page_fancy():
 #    with db:
