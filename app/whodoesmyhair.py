@@ -139,16 +139,13 @@ def slides():
     title = "WhoDoesMyHair demo slides"
     return render_template("slides.html",title=title,tab="slides")
 
-#@app.route("/db_fancy")
-#def cities_page_fancy():
-#    with db:
-#        cur = db.cursor()
-#        cur.execute("SELECT Name, CountryCode,Population FROM city ORDER BY Population LIMIT 15;")
+@app.route('/aboutme', methods=["GET"])
+def aboutme():
+    """Slides
+    """ 
+    title = "WhoDoesMyHair About Me"
+    return render_template("aboutme.html",title=title,tab="aboutme")
 
-#        query_results = cur.fetchall()
-#    cities = []
-#    for result in query_results:
-#        cities.append(dict(name=result[0], country=result[1], population=result[2]))
-#    return render_template('cities.html', cities=cities)
+
 
 
