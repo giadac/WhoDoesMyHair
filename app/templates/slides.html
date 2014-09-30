@@ -1,92 +1,87 @@
+<!-- based on https://github.com/mbostock/stack code -->
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <style>
-      section {
-      background: white;
-      }
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <style>
+            section {
+              background: white;
+            }
 
-      img {
-      width: auto;
-      height: 720px;
-      position: fixed;
-      left: 12%;
-      }
-    </style>
-  </head>
-  
-  <body>
-    <section>
-      <img src="../static/images/slides/Slide01.jpg" />
-    </section>
-    
-    <section>
-      <img src="../static/images/slides/Slide02.jpg" />
-    </section>
-    
-    <section>
-      <img src="../static/images/slides/Slide03.jpg" />
-    </section>
+            img {
+              width: auto;
+              height: 720px;
+	      position: fixed;
+	      left: 12%;
+            }
+    	</style>
+    </head>
 
-    <section>
-      <img src="../static/images/slides/Slide04.jpg" />
-    </section>
+    <body>
+      <section>
+	<img src="../static/images/slides/Slide01.jpg" />
+      </section>
+      <section>
+	<img src="../static/images/slides/Slide02.jpg" />
+      </section>
+      <section>
+	<img src="../static/images/slides/Slide03.jpg" />
+      </section>
+      <section>
+	<img src="../static/images/slides/Slide04.jpg" />
+      </section>
+      <section>
+	<img src="../static/images/slides/Slide05.jpg" />
+      </section>
+      <section>
+	<img src="../static/images/slides/Slide06.jpg" />
+      </section>
+      <section>
+	<img src="../static/images/slides/Slide07.jpg" />
+      </section>
+      <section>
+	<img src="../static/images/slides/Slide08.jpg" />
+      </section>
+      <section>
+	<img src="../static/images/slides/Slide09.jpg" />
+      </section>
+      <section>
+	<img src="../static/images/slides/Slide10.jpg" />
+      </section>
 
-    <section>
-      <img src="../static/images/slides/Slide05.jpg" />
-    </section>
+      <script src="../static/js/d3.v3.min.js"></script>
+      <script src="../static/js/stack.v1.min.js"></script>
+      <script>
+	
+	var mystack = stack()
+	    .on("activate", activate)
+	    .on("deactivate", deactivate);
 
-    <section>
-      <img src="../static/images/slides/Slide06.jpg" />
-    </section>
+	var section = d3.selectAll("section"),
+	    follow = d3.select("#follow"),
+	    followAnchor = d3.select("#follow-anchor"),
+	    lorenz = d3.select("#lorenz"),
+	    followIndex = section[0].indexOf(follow.node()),
+	    lorenzIndex = section[0].indexOf(lorenz.node());
 
-    <section>
-      <img src="../static/images/slides/Slide07.jpg" />
-    </section>
+	function refollow() {
+	  followAnchor.style("top", (followIndex + (1 - mystack.scrollRatio()) / 2 - d3.event.offset) * 100 + "%");
+	}
 
-    <section>
-      <img src="../static/images/slides/Slide08.jpg" />
-    </section>
+	function activate(d, i) {
+	  if (i === followIndex) mystack.on("scroll.follow", refollow);
+	  if (i === lorenzIndex) startLorenz();
+	}
 
-    <section>
-      <img src="../static/images/slides/Slide09.jpg" />
-    </section>
+	function deactivate(d, i) {
+	  if (i === followIndex) mystack.on("scroll.follow", null);
+	  if (i === lorenzIndex) stopLorenz();
+	}
 
-    <section>
-      <img src="../static/images/slides/Slide10.jpg" />
-    </section>
-
-    <script src="../static/js/d3.v3.min.js"></script>
-    <script src="../static/js/stack.v1.min.js"></script>
-    <script>
-
-      var mystack = stack()
-      .on("activate", activate)
-      .on("deactivate", deactivate);
-      
-      var section = d3.selectAll("section"),
-      follow = d3.select("#follow"),
-      followAnchor = d3.select("#follow-anchor"),
-      lorenz = d3.select("#lorenz"),
-      followIndex = section[0].indexOf(follow.node()),
-      lorenzIndex = section[0].indexOf(lorenz.node());
-      
-      function refollow() {
-      followAnchor.style("top", (followIndex + (1 - mystack.scrollRatio()) / 2 - d3.event.offset) * 100 + "%");
-      }
-
-      function activate(d, i) {
-      if (i === followIndex) mystack.on("scroll.follow", refollow);
-      if (i === lorenzIndex) startLorenz();
-      }
-
-      function deactivate(d, i) {
-      if (i === followIndex) mystack.on("scroll.follow", null);
-      if (i === lorenzIndex) stopLorenz();
-      }
-    </script>
-  </body>
+      </script>
+    </body>
 </html>
+
 
