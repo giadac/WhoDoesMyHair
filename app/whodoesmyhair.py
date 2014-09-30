@@ -137,7 +137,7 @@ def slides():
     """Slides
     """ 
     title = "WhoDoesMyHair demo slides"
-    return render_template("slides.html",title=title,tab="slides")
+    return render_template("slides2.html",title=title,tab="slides")
 
 @app.route('/aboutme', methods=["GET"])
 def aboutme():
