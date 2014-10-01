@@ -38,18 +38,17 @@
             <span class="icon-bar"></span>
           </button>
 	  <strong>
+	    <!-- tab Home -->
+	    {% if tab == "home" %}
             <a class="navbar-brand" style="color: #2a1710;">WhoDoesMyHair</a>
+	    {% else %}
+            <a class="navbar-brand" href="/index" style="color: #2a1710;">WhoDoesMyHair</a>
+	    {% endif %}
 	  </strong>
         </div>
         <!-- Collection of nav links and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="nav navbar-nav">
-	    <!-- tab Home -->
-	    {% if tab == "home" %}
-            <li class="active"><a style="background-color: #a9a779; color: #2a1710;">HOME</a></li>
-	    {% else %}
-            <li><a href="/index">HOME</a></li>
-	    {% endif %}
+          <ul class="nav navbar-nav navbar-right">
 	    <!-- tab stylist -->
 	    {% if tab == "stylist" %}
             <li class="active"><a style="background-color: #a9a779; color: #2a1710;">STYLIST</a></li>
