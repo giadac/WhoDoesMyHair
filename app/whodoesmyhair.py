@@ -13,7 +13,6 @@ import pdb
 import operator
 
 from app import load_db
-cnx = load_db.DB()
 
 import WilsonScoreInterval
 
@@ -32,10 +31,11 @@ def result():
     """Stylist
     """ 
     try:
+        cnx = load_db.DB()
+        cur = cnx.cur
+
         salon = request.form["salonname"]
         title = salon
-
-        cur = cnx.cur
 
         # query 1:
         # from salon_name get salon_id
@@ -66,7 +66,7 @@ def result():
             elif n.startswith("Ste"): street += ", "+n
             else: location = n
             
-    # 2.2: convert salon_rating in images
+        # 2.2: convert salon_rating in images
             s = [row[1] for row in raw2]
             bsn_stars = float(s[0])
 
@@ -80,7 +80,7 @@ def result():
         elif bsn_stars == 4.5: imagesrc = "static/images/45stars.png"
         elif bsn_stars == 5:   imagesrc = "static/images/50stars.png"
 
-    # 2.3: extract salon_number_of_reviews
+        # 2.3: extract salon_number_of_reviews
         rc = [row[2] for row in raw2]
         review_count = int(rc[0])
 
@@ -124,6 +124,8 @@ def result():
                     names = [thing[0] for thing in reversed(hey)]
                     scores = [str(thing[1])[:4] for thing in reversed(hey)]
 
+        cur.close()
+
         return render_template("stylist.html",tab="stylist",
                                from_url="/stylist",salon=salon,
                                street=street,location=location,city=city,
@@ -134,7 +136,8 @@ def result():
                                name2=names[2],score2=scores[2])
 
     except Exception as e:
-        raise InvalidUsage('Sorry, this salon is not present in our database!')
+        raise InvalidUsage(e)
+#        raise InvalidUsage('Sorry, this salon is not present in our database!')
 
 @app.route('/slides', methods=["GET"])
 def slides():
@@ -174,7 +177,7 @@ def handle_invalid_usage(error):
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('error.html', message = "Page ge Not Found (404).")
+    return render_template('error.html', message = "Page Not Found (404).")
 
 @app.errorhandler(500)
 def internal_error(error):
