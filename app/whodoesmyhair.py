@@ -125,6 +125,7 @@ def result():
                     scores = [str(thing[1])[:4] for thing in reversed(hey)]
 
         cur.close()
+        del cnx
 
         return render_template("stylist.html",tab="stylist",
                                from_url="/stylist",salon=salon,
