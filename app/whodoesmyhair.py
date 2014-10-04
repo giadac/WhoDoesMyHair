@@ -30,10 +30,10 @@ def home():
 def result():
     """Stylist
     """ 
-    try:
-        cnx = load_db.DB()
-        cur = cnx.cur
+    cnx = load_db.DB()
+    cur = cnx.cur
 
+    try:
         salon = request.form["salonname"]
         title = salon
 
@@ -124,9 +124,9 @@ def result():
                     names = [thing[0] for thing in reversed(hey)]
                     scores = [str(thing[1])[:4] for thing in reversed(hey)]
 
-        cur.close()
-        cnx.__del__()
-        del cnx
+        #cur.close()
+        #cnx.__del__()
+        #del cnx
 
         return render_template("stylist.html",tab="stylist",
                                from_url="/stylist",salon=salon,
