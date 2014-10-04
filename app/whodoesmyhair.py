@@ -40,6 +40,9 @@ def result():
     # from salon_name get salon_id
     query_id = "SELECT business_id, has_stylists FROM VegasSalonNames WHERE name = '%s'" % salon
     if not cur.execute(query_id):
+        cur.close()
+        cnx.__del__
+        del cnx
         return render_template("error.html",from_url="/error_page")
 
     raw = cur.fetchone()
@@ -52,6 +55,7 @@ def result():
     query = "SELECT full_address, stars, review_count, stylists, review_stylists FROM salonsVegas WHERE business_id = '%s'" % salon_id 
     cur.execute(query)
     raw2 = cur.fetchall()
+    cur.close()
 
     # 2.1: format the address info
     address = [ row[0] for row in raw2 ]
@@ -88,6 +92,8 @@ def result():
     # ERROR CONTROL:
     # if the business doesn't have a stylist, report an error page
     if not int(has_stylist):
+        cnx.__del__
+        del cnx
         return render_template("stylist2.html",tab="stylist",
                                from_url="/stylist",salon=salon,
                                street=street,location=location,city=city,
@@ -109,6 +115,8 @@ def result():
         # ERROR CONTROL:
         # we need at least 3 stylists
         if len(fdist) < 4:
+            cnx.__del__
+            del cnx
             return render_template("stylist2.html",tab="stylist",
                                    from_url="/stylist",salon=salon,
                                    street=street,location=location,
