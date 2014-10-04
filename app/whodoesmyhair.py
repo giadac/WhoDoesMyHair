@@ -84,29 +84,29 @@ def result():
         rc = [row[2] for row in raw2]
         review_count = int(rc[0])
 
-    # ERROR CONTROL:
-    # if the business doesn't have a stylist, report an error page
+        # ERROR CONTROL:
+        # if the business doesn't have a stylist, report an error page
         if not int(has_stylist):
             return render_template("stylist2.html",tab="stylist",
                                    from_url="/stylist",salon=salon,
                                    street=street,location=location,city=city,
-                                   bsn_stars=bsn_stars,review_count=review_count,
-                                   imagesrc=imagesrc)
+                                   bsn_stars=bsn_stars,
+                                   review_count=review_count,imagesrc=imagesrc)
         else:
             # 2.4: extract stylist_names
             names = [row[3] for row in raw2]
             n = names[0]
             stylists = n.split(" ")
             
-        # 2.5: extract salon_number_of_reviews_with_stylist_name
+            # 2.5: extract salon_number_of_reviews_with_stylist_name
             tr = [row[4] for row in raw2]
             totreviews = float(tr[0])
         
-        # 3.1: calculate the highest rated stylists
+            # 3.1: calculate the highest rated stylists
             fdist = FreqDist(stylists)
 
-        # ERROR CONTROL:
-        # we need at least 3 stylists
+            # ERROR CONTROL:
+            # we need at least 3 stylists
             if len(fdist) < 4:
                 return render_template("stylist2.html",tab="stylist",
                                        from_url="/stylist",salon=salon,
