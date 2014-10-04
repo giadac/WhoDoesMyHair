@@ -40,7 +40,7 @@ def result():
     # from salon_name get salon_id
     query_id = "SELECT business_id, has_stylists FROM VegasSalonNames WHERE name = '%s'" % salon
     if not cur.execute(query_id):
-        return render_template("error.html")
+        return render_template("error.html",from_url="/error_page")
 
     raw = cur.fetchone()
     salon_id = raw[0]
