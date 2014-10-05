@@ -31,20 +31,17 @@ def result():
     """Stylist
     """ 
     cnx = load_db.DB()
-    cur = cnx.cur
 
     salon = request.form.get("salonname", None)
     title = salon
 
     # query 1:
     # from salon_name get salon_id
-    query_id = "SELECT business_id, has_stylists FROM VegasSalonNames WHERE name = '%s'" % salon
-    cur.execute(query_id)
-    raw = cur.fetchone()
+    query_id="SELECT business_id, has_stylists FROM VegasSalonNames WHERE name = '%s'" % salon
+    cnx.cur.execute(query_id)
+    raw = cnx.cur.fetchone()
     if not raw:
-        cur.close()
-        cnx.__del__
-        del cnx
+        cnx.cur.close()
         return render_template("error.html")
 
     salon_id = raw[0]
@@ -54,9 +51,9 @@ def result():
     # from salon_id get address, salon_rating, salon_number_of_reviews,
     # stylist_names and salon_number_of_reviews_with_stylist_name
     query = "SELECT full_address, stars, review_count, stylists, review_stylists FROM salonsVegas WHERE business_id = '%s'" % salon_id 
-    cur.execute(query)
-    raw2 = cur.fetchall()
-    cur.close()
+    cnx.cur.execute(query)
+    raw2 = cnx.cur.fetchall()
+    cnx.cur.close()
 
     # 2.1: format the address info
     address = [ row[0] for row in raw2 ]
@@ -93,8 +90,6 @@ def result():
     # ERROR CONTROL:
     # if the business doesn't have a stylist, report an error page
     if not int(has_stylist):
-        cnx.__del__
-        del cnx
         return render_template("stylist2.html",tab="stylist",
                                from_url="/stylist",salon=salon,
                                street=street,location=location,city=city,
@@ -116,8 +111,6 @@ def result():
         # ERROR CONTROL:
         # we need at least 3 stylists
         if len(fdist) < 4:
-            cnx.__del__
-            del cnx
             return render_template("stylist2.html",tab="stylist",
                                    from_url="/stylist",salon=salon,
                                    street=street,location=location,
@@ -133,9 +126,6 @@ def result():
                 hey = sorted(rating.items(),key=operator.itemgetter(1))
                 names = [thing[0] for thing in reversed(hey)]
                 scores = [str(thing[1])[:4] for thing in reversed(hey)]
-
-    cnx.__del__
-    del cnx
 
     return render_template("stylist.html",tab="stylist",
                            from_url="/stylist",salon=salon,
