@@ -40,9 +40,9 @@ def result():
     query_id="SELECT business_id, has_stylists FROM VegasSalonNames WHERE name = '%s'" % salon
     cnx.cur.execute(query_id)
     raw = cnx.cur.fetchone()
-    if not raw:
-        cnx.cur.close()
-        return render_template("error.html")
+#    if not raw:
+#        cnx.cur.close()
+#        return render_template("error.html")
 
     salon_id = raw[0]
     has_stylist = raw[1]
