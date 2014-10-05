@@ -127,7 +127,7 @@ def result():
                 names = [thing[0] for thing in reversed(hey)]
                 scores = [str(thing[1])[:4] for thing in reversed(hey)]
 
-    return render_template("stylist.html",tab="stylist",
+    return render_template("stylist2.html",tab="stylist",
                            from_url="/stylist",salon=salon,
                            street=street,location=location,city=city,
                            bsn_stars=bsn_stars,review_count=review_count,
