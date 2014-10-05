@@ -39,13 +39,14 @@ def result():
     # query 1:
     # from salon_name get salon_id
     query_id = "SELECT business_id, has_stylists FROM VegasSalonNames WHERE name = '%s'" % salon
-    if not cur.execute(query_id):
+    cur.execute(query_id)
+    raw = cur.fetchone()
+    if not raw:
         cur.close()
         cnx.__del__
         del cnx
-        return render_template("error.html",from_url="/error_page")
+        return render_template("error.html")
 
-    raw = cur.fetchone()
     salon_id = raw[0]
     has_stylist = raw[1]
 
