@@ -8,8 +8,6 @@ import numpy as np
 from math import sqrt
 
 from app import load_db
-cnx = load_db.DB()
-cur = cnx.cur
 
 # for each single review rating, calculate weights 
 # return 2 values: positive weight, negative weight
@@ -56,9 +54,12 @@ def confidence(ups, downs):
     return ((phat + z*z/(2*n) - z * sqrt((phat*(1-phat)+z*z/(4*n))/n))/(1+z*z/n))
 
 def WilsonScore(stylist,business_id):
+    cnx = load_db.DB()
+
     query_review = "SELECT stars FROM review_Vegas_onlyhair WHERE business_id = '" + str(business_id) + "' AND text LIKE '%" + stylist + "%';" 
-    cur.execute(query_review)
-    raw3 = cur.fetchall()
+    cnx.cur.execute(query_review)
+    raw3 = cnx.cur.fetchall()
     review_star = [int(row[0]) for row in raw3]
     ups, downs = wee(review_star)
+    cnx.cur.close()
     return 1 + 4*(confidence(ups, downs))
