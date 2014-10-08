@@ -131,7 +131,7 @@ def result():
                            from_url="/stylist",salon=salon,
                            street=street,location=location,city=city,
                            bsn_stars=bsn_stars,review_count=review_count,
-                           imagesrc=imagesrc,
+                           imagesrc=imagesrc,howmany=len(fdist),
                            name0=names[0],score0=scores[0],
                            name1=names[1],score1=scores[1],
                            name2=names[2],score2=scores[2])
